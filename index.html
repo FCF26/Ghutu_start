@@ -7,10 +7,10 @@
     <style>
         /* CSS কালার স্কিম এবং স্টাইল */
         :root {
-            --bg-color: #1C354C; /* আপনার দেওয়া গাঢ় নীল ব্যাকগ্রাউন্ড */
-            --accent-orange: #e67e22; /* লোগোর তামাটে/কমলা থিমের সাথে ম্যাচ করা রঙ */
-            --text-light: #ffffff; /* সাদা টেক্সট */
-            --spinner-base: rgba(255, 255, 255, 0.15); /* স্পিনারের হালকা বর্ডার */
+            --bg-color: #1C354C; 
+            --accent-orange: #e67e22; 
+            --text-light: #ffffff; 
+            --spinner-base: rgba(255, 255, 255, 0.15); 
         }
 
         body, html {
@@ -46,18 +46,17 @@
         .logo-container {
             width: 150px;
             height: 150px;
-            margin-bottom: 25px;
-            /* আপনার দেওয়া লোগো ফাইল */
+            margin-bottom: 30px;
             background-image: url('Ghutu.png'); 
             background-size: cover; 
             background-repeat: no-repeat;
             background-position: center;
-            background-color: #ffffff; /* লোগোর ব্যাকগ্রাউন্ড সাদা */
+            background-color: #ffffff; 
             border-radius: 50%; 
             border: 4px solid var(--accent-orange); 
             animation: pulseLogo 2s infinite ease-in-out; 
             
-            /* Square box shadow বাগ ফিক্স করার কোড (Hardware Acceleration) */
+            /* Hardware Acceleration (বাগ ফিক্স) */
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             -moz-backface-visibility: hidden;
@@ -66,11 +65,9 @@
             -webkit-mask-image: -webkit-radial-gradient(white, black);
         }
 
-        /* লোগোর পালস অ্যানিমেশন (কমলা আভা ছড়ানো) */
         @keyframes pulseLogo {
             0% { 
                 transform: scale(1); 
-                /* 230, 126, 34 হলো #e67e22 (কমলা) রঙের RGB কোড */
                 box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.7); 
             }
             50% { 
@@ -83,14 +80,31 @@
             }
         }
 
-        /* CSS মেকানিক্যাল স্পিনার */
+        /* স্পিনার এবং বাইক আইকনের কন্টেইনার */
+        .spinner-wrapper {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ঘোরানো স্পিনার */
         .bike-spinner {
-            width: 50px;
-            height: 50px;
+            position: absolute;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             border: 5px solid var(--spinner-base); 
             border-top: 5px solid var(--accent-orange); 
             animation: spin 1s linear infinite;
+        }
+
+        /* স্পিনারের ভেতরের বাইক আইকন */
+        .bike-icon {
+            position: absolute;
+            z-index: 10;
         }
 
         @keyframes spin {
@@ -123,7 +137,18 @@
     <!-- লোডার স্ক্রিন -->
     <div id="loader-screen">
         <div class="logo-container"></div>
-        <div class="bike-spinner"></div>
+        
+        <!-- নতুন প্রোগ্রেস বার (স্পিনারের মাঝে বাইক) -->
+        <div class="spinner-wrapper">
+            <div class="bike-spinner"></div>
+            <!-- বাইকের SVG আইকন -->
+            <div class="bike-icon">
+                <svg viewBox="0 0 640 512" width="30" height="30">
+                    <path fill="#e67e22" d="M280 32C280 14.3 294.3 0 312 0L336 0c44.2 0 80 35.8 80 80l0 16 32 0c53 0 96 43 96 96l0 27.4c0 3.2-1.3 6.2-3.6 8.4l-42 42c-2.3 2.3-5.3 3.6-8.4 3.6l-50 0c-35.3 0-64-28.7-64-64c0-11.5 3-22.3 8.3-31.5l-63.5-31.8C314 140.6 304 153.2 304 168l0 152c0 23.9-15.6 44.2-37.4 51.5L256 375l0 137c0 17.7-14.3 32-32 32l-32 0c-17.7 0-32-14.3-32-32l0-160c0-14.9 10.3-27.7 24.7-31.2l61.5-14.9C251.7 296 256 284.6 256 272l0-104c0-26.5 21.5-48 48-48l16 0 0-40c0-17.7-14.3-32-32-32l-8 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l8 0zM128 384c-35.3 0-64 28.7-64 64s28.7 64 64 64s64-28.7 64-64s-28.7-64-64-64zM0 448c0 70.7 57.3 128 128 128s128-57.3 128-128s-57.3-128-128-128S0 377.3 0 448zM512 384c-35.3 0-64 28.7-64 64s28.7 64 64 64s64-28.7 64-64s-28.7-64-64-64zM384 448c0 70.7 57.3 128 128 128s128-57.3 128-128s-57.3-128-128-128s-128 57.3-128 128z"/>
+                </svg>
+            </div>
+        </div>
+
         <div class="loading-text">
             অনুগ্রহ করে অপেক্ষা করুন... <br>
             Bike Repair & Servicing পোর্টাল লোড হচ্ছে...
